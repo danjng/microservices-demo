@@ -1,0 +1,55 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    hostname: rabbitmq
+    ports:
+      - "5672"
+    restart: always
+
+  fares:
+    image: 192.168.33.11/brownfieldairlines/fares:latest
+    ports:
+      - "8080"
+    restart: always
+    depends_on:
+      - rabbitmq
+  
+  search:
+    image: 192.168.33.11/brownfieldairlines/search
+    ports:
+      - "8090"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - fares
+      
+  checkin:
+    image: 192.168.33.11/brownfieldairlines/checkin:latest
+    ports:
+      - "8070"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - search
+  
+  book:
+    image: 192.168.33.11/brownfieldairlines/book:latest
+    ports:
+      - "8060"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - checkin
+  
+  website:
+    image: 192.168.33.11/brownfieldairlines/website:latest
+    ports:
+      - "8001:8001"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - book
+      - fares
+      - search
+      - checkin
