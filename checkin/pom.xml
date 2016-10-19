@@ -98,6 +98,22 @@
 						</resource>
 					</resources>
 				</configuration>
+				<executions>
+					<execution>
+						<id>remove-image</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>removeImage</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

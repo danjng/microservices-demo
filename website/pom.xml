@@ -48,7 +48,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-	 <dependency>
+	 	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>		
@@ -57,12 +57,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>		        
 			<groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 		
 	</dependencies>
 	 
@@ -94,6 +96,22 @@
 						</resource>
 					</resources>
 				</configuration>
+				<executions>
+					<execution>
+						<id>remove-image</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>removeImage</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
